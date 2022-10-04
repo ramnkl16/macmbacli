@@ -1,0 +1,15 @@
+{{ define "realm" }}
+{{- $entityName := (.ModelName) -}}
+{{- $short := (shortname .ModelName ) -}}
+
+//Auto code generated from xml definition {{timenow}}
+//{{.ModelName}}
+import 'package:realm/realm.dart';
+part '{{tolowercase .ModelName}}.ream.g.dart';
+
+
+class _{{$entityName}}{
+  {{- range .Fields }} 
+  {{if eq .Name "id"}}{{end}}late {{ .Type }} {{ .Name }};{{end}}	
+  }
+{{end}}

@@ -1,0 +1,42 @@
+assumption product will be master 
+regionProuduct is per country or region, also support languages
+default master copy will be loaded and overwite when needed,
+Tim:
+    how to acheive fall back
+    is there any benefit is the keep json attribute Name shorter
+Jim:
+    is Accessories part vary per region
+    Is category changes per region
+    Is discondinue or available date vary ?
+    What is the use of PAGE on catalog 
+    What is the use of CONTRACT gover Contract (Yes/No)
+    What is the use D.C. Inventory (1-510000, N/A, Check COMP)
+    Whas is the status meaning of  (A/D) active or disabled ?
+    How Replacement works, a  product has multiple replacement items or cascading
+    is IsprocurementsItemMandatory, IsprocurementsWarehouseMandatory, ProcurementQuantityMultiple,
+    
+Producttype
+    p-->Product
+    Pm-->Product Master
+attrs collection of key value pair for generic attributes
+    How to manage attributes group per category mainly for facet filters
+    dcInventAttr - d.c. Inventory attributes
+bAttrs--> boolean attributes
+    isGCont -->Is government contract allowed
+    isKit --> is kit components
+    isTO --> is take order
+    isTP --> is third party
+Status (A/D)
+warranty (M1,N0,VA,R1,V1,V2,C0,RL,VL,M3,M2,V3,R3,D1,DL,RA,MA,R2,R5,D3,D5,P1,D2,ML,VH,B1,PL,RH,W1,W3,W2,V5,R7,P2,PA,PH,R4)
+class (CLASS-A,CLASS-E,CLASS-C,CLASS-F,CLASS-B,CLASS-X,CLASS-D,CLASS-N,CLASS-I,CLASS-H,CLASS-M,CLASS-G,CLASS-J,CLASS-Q)
+Set--> will have items that contains in the set.
+
+acceParts -- collections of acessories, will vary based on country
+related.type
+    UPSelling
+    Cross Selling
+
+
+   
+
+

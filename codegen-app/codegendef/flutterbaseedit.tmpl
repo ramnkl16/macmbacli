@@ -1,0 +1,311 @@
+{{ define "base_edit" }}
+{{- $entityName := (.Name) -}}
+{{- $short := (shortname .Name ) -}}
+//Auto code generated from xml definition {{timenow}}
+//{{.Name}}
+
+import '../../app_route/AppRouting.gr.dart';
+import '../../constants/app_constants.dart';
+import '../../constants/app_constraints.dart';
+import '../../constants/app_paths.dart';
+import '../../constants/app_values.dart';
+import '../../constants/navigation/nav_paths.dart';
+import '../../helpers/api_helper.dart';
+import '../../helpers/ui_helpers/common_dropdown.dart';
+import '../../helpers/ui_helpers/common_textfield.dart';
+import '../../helpers/global.dart';
+import '../../helpers/ui_helpers/grid_helper.dart';
+import '../../helpers/ui_helpers/ui_helpers.dart';
+import '../common/cubit/base_cubit.dart';
+import '../common/cubit/extended_cubits.dart';
+import '../common/cubit/hydrated_base_cubit.dart';
+import '../../modules/{{tolowercase .Name}}/{{tolowercase .Name}}.model.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/services.dart';
+import 'package:auto_route/auto_route.dart';
+
+
+class {{.Name}}EditPage extends StatefulWidget {
+  const {{.Name}}EditPage({Key? key, required this.{{$short}}}) : super(key: key);
+  final {{.ModelName}} {{$short}};
+
+  @override
+  _{{.Name}}EditPageState createState() => _{{.Name}}EditPageState();
+}
+
+class Keys {
+ {{- range .Fields }} 
+  static const {{.Type}} {{.Name}} = '{{.Name}}';{{end}}
+  static const String submit = 'submit';
+}
+
+class _{{.Name}}EditPageState extends State<{{.Name}}EditPage> {
+  late bool isWebOrDesktop;
+  // ignore: prefer_final_fields
+
+  late {{.Name}}Model {{$short}};
+  final _formKey = GlobalKey<FormState>();
+  final Map<String, String> _formData = <String, String>{};
+  
+  late Map<String, TextEditingController> ctrls;
+  late Map<String, FocusNode> fNodes;
+  late Map<String, String> lbls;
+  late Map<String, int> maxLens;
+  late double screenWidth;
+  
+
+  /// Determine to decide whether the device in landscape or in portrait.
+  late bool isLandscapeInMobileView;
+
+  @override
+  void initState() {
+    isWebOrDesktop = Global.isWeb || Global.isDesktop;
+    {{$short}} = widget.{{$short}};
+   
+   
+    instantiateValues();
+    {{- range .Fields }}
+    {{if eq .DartType "int"}}String {{.Name}} = {{$short}}.{{.Name}}.toString();{{end}}
+    {{if eq .DartType "double"}}String {{.Name}} = {{$short}}.{{.Name}}.toString();{{end}}
+    {{if eq .InputType "text"}}ctrls[Keys.{{.Name}}] = TextEditingController(text:{{if eq .DartType "int"}}{{.Name}}{{else}}{{if eq .DartType "double"}}{{.Name}}{{else}}{{$short}}.{{.Name}}{{end}}{{end}});
+    ctrls[Keys.{{.Name}}]?.text  = {{if eq .DartType "int"}}{{.Name}}{{else}}{{if eq .DartType "double"}}{{.Name}}{{else}}{{$short}}.{{.Name}}{{end}}{{end}};
+    fNodes[Keys.{{.Name}}] = FocusNode();  {{end}} {{end}}
+    
+    {{- range .Fields }}
+    {{if .MaxCharLimit}} maxLens[Keys.{{.Name}}] = {{.MaxCharLimit}}; {{end}} {{end}}
+    lbls[Keys.submit] = "Submit";
+
+{{- range .Fields }}
+     lbls[Keys.{{.Name}}] = "{{.Label}}";
+    {{end}}
+
+    initializeFormValues({{- range .Fields }} {{if eq .DartType "int"}} {{.Name}},{{else}}{{if eq .DartType "double"}} {{.Name}},{{end}}{{end}}{{end}});
+    super.initState();
+  }
+
+  void initializeFormValues({{- range .Fields }} {{if eq .DartType "int"}}String {{.Name}},{{else}}{{if eq .DartType "double"}}String {{.Name}},{{end}}{{end}}{{end}}){
+    {{- range .Fields }}
+    _formData[Keys.{{.Name}}] = {{if eq .DartType "int"}}{{.Name}}{{else}}{{if eq .DartType "double"}}{{.Name}}{{else}}{{$short}}.{{.Name}}{{end}}{{end}};{{end}}
+  }
+
+  void instantiateValues(){
+    ctrls = <String, TextEditingController>{};
+    fNodes = <String, FocusNode>{};
+    lbls = <String, String>{};
+    maxLens = <String, int>{};
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    screenWidth = MediaQuery.of(context).size.width;
+    return Scaffold(
+        body: SingleChildScrollView(
+      child: Form(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+          key: _formKey,
+          child: Column(crossAxisAlignment: CrossAxisAlignment.center,children: [
+          UIHelper.buildFormHeader(
+              context,
+              {{$short}}.id!=null ? "Edit {{$entityName}}" : "Create {{$entityName}}",
+              onPressed: () => Navigator.pop(context),
+            ),
+          {{- range .Fields }}
+          {{if eq .InputType "text"}} //{{.Label}}
+            buildCommonTextField(k:Keys.{{.Name}}, textInputType:TextInputType.{{.TextInputType}}, 
+            {{if eq .DartType "double"}}inputFormatters:AppValues.decimalPriceInputFormatter
+            {{else}}{{if eq .DartType "int"}}inputFormatters:[FilteringTextInputFormatter.digitsOnly]{{end}}{{end}}),{{end}}
+          {{if eq .InputType "dropdown"}} //{{.Label}}
+          build{{removeidsuffix .Name}}DropDown(),
+                 {{end}}
+          {{if eq .InputType "date"}} //{{.Label}}
+           gridHelper.buildDatePickingTxtField(context, _formData,
+                    lbls[Keys.{{.Name}}]!, ctrls[Keys.{{.Name}}]!, Keys.{{.Name}}), {{end}}
+{{end}}
+             Column(
+                children: [
+                  BlocBuilder<{{.Name}}EditCubit, BaseState>(
+                    builder: (context, state) {
+                      if (state is BaseLoading) {
+                        return CircularProgressIndicator();
+                      }else if (state is BaseEditSuccess) {
+                       {{$short}}.id = state.id;
+                        Navigator.pop(context, state.id);
+                      } else if (state is BaseFailure) {
+                        ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text(state.errorMsg)));
+                  }
+                      return MaterialButton(
+                        onPressed: () => formValidation(),
+                        child: UIHelper.btnDecoration(
+                              lbls[Keys.submit]!, screenWidth),
+                      );
+                    },
+                  ),
+                  MaterialButton(
+                      onPressed: () => AutoRouter.of(context).pop(),
+                      child: UIHelper.btnDecoration(
+                          AppConstants.cancelBtn, screenWidth,
+                          color: Colors.blueGrey),
+                    )
+                ],
+              ),
+            ],
+            ),),
+    ),);
+  }
+
+  {{- range .Fields }}{{if eq .InputType "dropdown"}}
+  //{{.Label}}
+  Widget build{{removeidsuffix .Name}}DropDown() {
+    return BlocBuilder<{{removeidsuffix .Name}}ListCubit, BaseState>(
+      builder: (context, state) {
+        if (state is BaseListSuccess<{{removeidsuffix .Name}}Model>) {
+          return CommonDropDown(
+              k: Keys.{{.Name}},
+              uniqueValues: state.list.map((e) => e.id!).toList(),
+              lblTxt: lbls[Keys.{{.Name}}]!,
+              onChanged: (String? value) {
+                if (value != null) {
+                  _formData[Keys.{{.Name}}] = value;
+                }
+              },
+              ddDataSourceNames: state.list.map((e) => e.name).toList(),
+              formData: _formData,
+              fNodes: fNodes);
+        } else if (state is BaseEmpty) {
+          return buildDisabledDropdown(
+              Keys.{{.Name}}, "No record found,Please create a {{.Label}}");
+        } else if (state is BaseFailure) {
+          return buildDisabledDropdown(Keys.{{.Name}}, state.errorMsg);
+        }
+        return Text("Could not load {{.Label}}");
+      },
+    );
+  }
+  {{end}}{{end}} 
+
+  Widget buildDisabledDropdown(String key, String label) {
+    return CommonDropDown(
+      k: key,
+      uniqueValues: const [],
+      disableHint: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label),
+        ],
+      ),
+      lblTxt: lbls[key]!,
+      ddDataSourceNames: const [],
+      formData: _formData,
+      fNodes: fNodes,
+    );
+  }
+
+  Widget buildCommonTextField(
+      {required String k,
+      TextInputType? textInputType,
+      List<TextInputFormatter>? inputFormatters}) {
+    return CommonTextField(
+      k: k,
+      textInputType: textInputType,
+      inputFormatters: inputFormatters,
+      formData: _formData,
+      lbls: lbls,
+      ctrls: ctrls,
+      reqValidate: _reqValidate,
+      fNodes: fNodes,
+    );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    isLandscapeInMobileView = !isWebOrDesktop &&
+        MediaQuery.of(context).orientation == Orientation.landscape;
+  }
+ 
+
+  Widget _buildDatePicker(String key) {
+    print(
+      "dt picker initial at start ${ctrls[key]!.text} dd {DateTime.parse(ctrls[key]!.text)}",
+    );
+    return TextButton.icon(
+      onPressed: () async {
+        DateTime? date = DateTime(1900);
+        //print("dt picker initial val ${ctrls[key]!.text}");
+        FocusScope.of(context).requestFocus(FocusNode());
+        date = await showDatePicker(
+            context: context,
+            initialDate: _formData[key]!.isEmpty
+                ? DateTime.now()
+                : DateTime.parse(_formData[key]!),
+            firstDate: DateTime(1900),
+            lastDate: DateTime(2100));
+        ctrls[key]!.text = Global.dfMMddyyyy.format(date!);
+        _formData[key] = date.toString();
+      },
+      icon: const Icon(Icons.date_range),
+      label: const Text(""),
+    );
+  }
+
+  String? _reqValidate(String k, String? value) {
+    if (value!.isEmpty) {
+      fNodes[k]!.requestFocus();
+      return "Please provide ${lbls[k]}.";
+    }
+    return null;
+  }
+
+
+
+  formValidation()  {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      update{{ .Name}}Model();
+      
+      // if ({{$short}}.id.isEmpty) {
+      //   //creaetd mode need
+      //   {{$short}}.id = id!;
+      // }
+      // setState(() {});
+
+      // if (BlocProvider.of<{{.Name}}EditCubit>(context).state
+      //     is {{.Name}}EditSuccess) {
+      //   // Navigator.pop(context);
+      // }
+    }
+  }
+
+  void update{{ .Name}}Model() {
+
+  {{- range .Fields }} 
+  widget.{{$short}}.{{.Name}} = {{if eq .DartType "String"}} 
+            _formData[Keys.{{.Name}}]!;{{end}}
+            
+            {{if eq .DartType "int"}} 
+            int.parse(_formData[Keys.{{.Name}}]!);{{end}}
+            
+            {{if eq .DartType "double"}} 
+            double.parse(_formData[Keys.{{.Name}}]!);{{end}}
+            {{end}}
+    BlocProvider.of<{{.Name}}EditCubit>(context).performCreateorUpdate({{$short}});
+  ///update goes here from input control to 
+}
+
+@override
+  void dispose() {
+    //Disposing all focus nodes
+    fNodes.forEach((key, value) {
+      value.dispose();
+    });
+
+    ctrls.forEach((key, value) {
+      value.dispose();
+    });
+
+    super.dispose();
+  }
+
+}{{end}}

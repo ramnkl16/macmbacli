@@ -1,0 +1,23 @@
+{
+    "region":[],
+    "langCode":[],
+    "prodNum":"ACP10120H",
+    "prodName":"10HP 120GAL HORIZONTAL 2 STAGE",
+    "attrs":[{
+       "k":"size",
+       "v":"5"
+    }],
+    "categories": [],
+    "catalog":"",
+    "groupId":[],
+    "related":[
+    {"type":"",
+    "relatedNum":""}
+    ],
+    "repaParts":["00667-DP10HP3","00667-DP10HP34"],
+    "acceParts":[],
+    "brand":"",
+    "availDt":"",
+    "discoDt":""
+   
+   }

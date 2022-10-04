@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- possible input type TextInputType [none,number,phone,datetime,emailAddress,url,visiblePassword,name,streetAddress,multiline,text]  
+ if nothing is provided then the default value set as none-->
+<!-- if label field is empty then consider not shown on the screen only used for rest api -->
+<!-- inputType possible values are [text,dropdown,date] -->
+<!-- template="cubit|state|ds|repo|model|edit|list" -->
+<!-- <module name="schedule" includeInPath="false"> -->
+<module name="membership_type" includeInPath="false">
+  <models>
+    <!-- <model type="list" name="User" modelName="UserModel" template="ds|base_list|base_edit" fileNameExt="dart" shortName="um" restApiPath="/api/user">
+       <field type="String" name="id" dartType="String" label="" inputType="text" textInputType="number" maxCharLimit="50" />
+      <field type="String" name="username" dartType="String" label="User Name" inputType="text" textInputType="text" maxCharLimit="50" />
+      <field type="String" name="userGroupId" dartType="String" label="Group Name" inputType="dropdown" textInputType="" maxCharLimit="" />
+      <field type="String" name="organizationId" dartType="String" label="" inputType="" textInputType="" maxCharLimit="" />
+      <field type="String" name="token" dartType="String" label="" inputType="" textInputType="" maxCharLimit="" />
+      <field type="String" name="email" dartType="String" label="Email" inputType="text" textInputType="emailAddress" maxCharLimit="45" />
+      <field type="String" name="mobile" dartType="String" label="Phone" inputType="text" textInputType="phone" maxCharLimit="15" />
+      <field type="String" name="firstName" dartType="String" label="First Name" inputType="text" textInputType="name" maxCharLimit="45" />
+      <field type="String" name="lastName" dartType="String" label="Last Name" inputType="text" textInputType="name" maxCharLimit="45" />
+      <field type="String" name="userRoleId" dartType="String" label="User Role" inputType="dropdown" textInputType="" maxCharLimit="" />
+    </model>
+     -->
+    <!-- <model type="list" name="Booking" modelName="BookingReqModel" template="edit" fileNameExt="dart" shortName="um" restApiPath="/api/user">
+      <field type="String" name="id" dartType="String" label="" inputType="text" textInputType="number" maxCharLimit="50" />
+      <field type="String" name="bookingtype" dartType="String" label="Booking Type" inputType="dropdown" textInputType="text" maxCharLimit="" />
+      <field type="String" name="slotprice" dartType="double" label="Price" inputType="text" textInputType="number" maxCharLimit="" />
+      <field type="String" name="userplayer" dartType="String" label="Player" inputType="text" textInputType="name" maxCharLimit="" />
+      <field type="String" name="tax" dartType="double" label="Tax" inputType="text" textInputType="number" maxCharLimit="10" />
+      <field type="String" name="player_email" dartType="String" label="Player Email" inputType="text" textInputType="emailAddress" maxCharLimit="45" />
+      <field type="String" name="player_age" dartType="int" label="Player Age" inputType="text" textInputType="number" maxCharLimit="3" />
+      <field type="String" name="player_name" dartType="String" label="Player Name" inputType="text" textInputType="name" maxCharLimit="45" />
+    </model> -->
+
+
+    <!-- <model type="list" name="SportType" modelName="BookingReqModel" template="model|repo" fileNameExt="dart" shortName="um" restApiPath="/api/user">
+      <field type="String" name="id" dartType="String" label="" inputType="text" textInputType="number" maxCharLimit="50" />
+      <field type="String" name="bookingtype" dartType="String" label="Booking Type" inputType="dropdown" textInputType="text" maxCharLimit="" />
+      <field type="String" name="slotprice" dartType="double" label="Price" inputType="text" textInputType="number" maxCharLimit="" />
+      <field type="String" name="userplayer" dartType="String" label="Player" inputType="text" textInputType="name" maxCharLimit="" />
+      <field type="String" name="tax" dartType="double" label="Tax" inputType="text" textInputType="number" maxCharLimit="10" />
+      <field type="String" name="player_email" dartType="String" label="Player Email" inputType="text" textInputType="emailAddress" maxCharLimit="45" />
+      <field type="String" name="player_age" dartType="int" label="Player Age" inputType="text" textInputType="number" maxCharLimit="3" />
+      <field type="String" name="player_name" dartType="String" label="Player Name" inputType="text" textInputType="name" maxCharLimit="45" />
+    </model> -->
+
+    <!-- <model type="list" name="MembershipType" modelName="MembershipTypeModel" template="list|ds|base_edit|edit" fileNameExt="dart" shortName="mt" restApiPath="/api/membershipType">
+      
+      <field type="String" name="name" dartType="String" label="Name" inputType="text" textInputType="text" maxCharLimit="50" />
+      <field type="String" name="description" dartType="String" label="Description" inputType="text" textInputType="text" maxCharLimit="" />
+      <field type="String" name="validityDurationDays" dartType="int" label="Membership validity duration" inputType="text" textInputType="number" maxCharLimit="5" />
+      <field type="String" name="amount" dartType="double" label="Amount" inputType="text" textInputType="number" maxCharLimit="10" />
+      <field type="String" name="advanceBookingMinutes" dartType="int" label="Time in advance players can book" inputType="text" textInputType="number" maxCharLimit="10" />
+     
+    </model> -->
+
+    <!-- <model type="list" name="ScheduleExceptionType" modelName="ScheduleExceptionTypeModel" template="base_list|base_edit|ds" fileNameExt="dart" shortName="crtType" restApiPath="/api/courtType">
+      
+      <field type="String" name="name" dartType="String" label="Name" inputType="text" textInputType="text" maxCharLimit="" />
+      <field type="String" name="backgroundColor" dartType="String" label="Background Color" inputType="text" textInputType="text" maxCharLimit="" />
+      <field type="String" name="textColor" dartType="String" label="Text Color" inputType="text" textInputType="text" maxCharLimit="" />
+     
+    </model> -->
+
+    <!-- <model type="list" name="ScheduleException" modelName="ScheduleExceptionModel" template="base_list|base_edit|ds" fileNameExt="dart" shortName="schException" restApiPath="api/scheduleException">
+      
+      <field type="String" name="startDate" dartType="Datetime" label="Start Date" inputType="datetime" textInputType="text" maxCharLimit="" />
+      <field type="String" name="endDate" dartType="Datetime" label="End Date" inputType="datetime" textInputType="text" maxCharLimit="" />
+      <field type="String" name="textColor" dartType="String" label="Text Color" inputType="text" textInputType="text" maxCharLimit="" />
+     
+    </model> -->
+
+    <!-- <model type="list" name="Court" modelName="CourtModel" template="base_list|base_edit|ds" fileNameExt="dart" shortName="crt" restApiPath="api/court">
+      
+      <field type="String" name="name" dartType="String" label="Start Date" inputType="text" textInputType="text" maxCharLimit="" />
+      <field type="String" name="description" dartType="String" label="End Date" inputType="text" textInputType="text" maxCharLimit="" />
+      <field type="String" name="recessDuration" dartType="int" label="Recess Duration" inputType="text" textInputType="text" maxCharLimit="" />
+      <field type="String" name="sportTypeId" dartType="String" label="Sport Type" inputType="dropdown" textInputType="text" maxCharLimit="" />
+      <field type="String" name="courtTypeId" dartType="String" label="Court Type" inputType="dropdown" textInputType="text" maxCharLimit="" />
+
+     
+    </model> -->
+
+    <!-- <model type="list" name="SportType" modelName="SportTypeModel" template="base_list|base_edit|ds" fileNameExt="dart" shortName="bt" restApiPath="api/court">
+      
+      <field type="String" name="name" dartType="String" label="Name" inputType="text" textInputType="text" maxCharLimit="" />
+      <field type="String" name="description" dartType="String" label="Description" inputType="text" textInputType="text" maxCharLimit="" />
+       -->
+
+    <!-- </model> -->
+
+    <!-- <model type="list" name="ScheduleException" modelName="ScheduleExceptionModel" template="base_list|ds" fileNameExt="dart" shortName="schException" restApiPath="api/scheduleException">
+      <field type="String" name="id" dartType="String" label="ID" inputType="text" textInputType="text" maxCharLimit="" />
+      <field type="String" name="name" dartType="String" label="Name" inputType="text" textInputType="text" maxCharLimit="" />
+      <field type="String" name="scheduleId" dartType="String" label="Schedule" inputType="dropdown" textInputType="text" maxCharLimit="" />
+      <field type="String" name="startDate" dartType="Datetime" label="Start Date" inputType="date" textInputType="text" maxCharLimit="" />
+      <field type="String" name="endDate" dartType="Datetime" label="End Date" inputType="date" textInputType="text" maxCharLimit="" />
+      <field type="String" name="exceptionTypeId" dartType="String" label="Schedule Exception Type" inputType="dropdown" textInputType="text" maxCharLimit="" />
+
+    </model> -->
+    <!-- <model type="list" name="Player" modelName="PlayerModel" template="ds|base_list|base_edit|model" fileNameExt="dart" shortName="pm" restApiPath="/api/userPlayer">
+      <field type="String" name="id" dartType="String" label="" inputType="text" textInputType="number" maxCharLimit="50" />
+      <field type="String" name="namespaceId" dartType="String" label="" inputType="" textInputType="" maxCharLimit="" />
+      <field type="String" name="token" dartType="String" label="" inputType="" textInputType="" maxCharLimit="" />
+      <field type="String" name="email" dartType="String" label="Email" inputType="text" textInputType="emailAddress" maxCharLimit="45" />
+      <field type="String" name="mobile" dartType="String" label="Phone" inputType="text" textInputType="phone" maxCharLimit="15" />
+      <field type="String" name="firstName" dartType="String" label="First Name" inputType="text" textInputType="name" maxCharLimit="45" />
+      <field type="String" name="lastName" dartType="String" label="Last Name" inputType="text" textInputType="name" maxCharLimit="45" />
+      <field type="String" name="age" dartType="int" label="Age" inputType="int" textInputType="name" maxCharLimit="3" />
+      <field type="String" name="gender" dartType="int" label="Gender" inputType="text" textInputType="name" maxCharLimit="3" />
+      <field type="String" name="membershipTypeId" dartType="String" label="Membership type" inputType="text" textInputType="name" maxCharLimit="25" />
+      <field type="String" name="primaryId" dartType="String" label="Primary Name" inputType="text" textInputType="name" maxCharLimit="25" />
+      <field type="String" name="updatedAt" dartType="Datetime" label="Last Updated" inputType="text" textInputType="" maxCharLimit="" />
+    </model> -->
+    <!-- <model type="list" name="MembershipSport" modelName="MembershipSportModel" template="ds|base_list|base_edit|model" fileNameExt="dart" shortName="ms" restApiPath="/api/membershipSportLink">
+      <field type="String" name="id" dartType="String" label="" inputType="text" textInputType="number" maxCharLimit="50" />
+      <field type="String" name="namespaceId" dartType="String" label="" inputType="" textInputType="" maxCharLimit="" />
+      <field type="String" name="membershipTypeId" dartType="String" label="" inputType="" textInputType="" maxCharLimit="" />
+      <field type="String" name="sportTypeId" dartType="String" label="Email" inputType="text" textInputType="emailAddress" maxCharLimit="45" />
+      <field type="String" name="validityDurationDays" dartType="int" label="Validity Duration in Days" inputType="text" textInputType="name" maxCharLimit="3" />
+      <field type="String" name="amount" dartType="Float" label="Amount" inputType="text" textInputType="name" maxCharLimit="3" />
+      <field type="String" name="updatedAt" dartType="Datetime" label="Last Updated" inputType="text" textInputType="" maxCharLimit="" />
+    </model> -->
+    <!-- <model type="list" name="PlayerMembershipHistory" modelName="PlayerMembershipHistoryModel" template="ds|base_list|model" fileNameExt="dart" shortName="ms" restApiPath="/api/membershipSportLink">
+      <field type="String" name="id" dartType="String" label="" inputType="text" textInputType="number" maxCharLimit="50" />
+      <field type="String" name="namespaceId" dartType="String" label="" inputType="" textInputType="" maxCharLimit="" />
+      <field type="String" name="playerId" dartType="String" label="" inputType="" textInputType="" maxCharLimit="" />
+      <field type="String" name="membershipSportId" dartType="String" label="" inputType="" textInputType="" maxCharLimit="" />
+      <field type="String" name="startDate" dartType="String" label="startDate" inputType="text" textInputType="emailAddress" maxCharLimit="45" />
+      <field type="String" name="endDate" dartType="int" label="" inputType="text" textInputType="name" maxCharLimit="3" />
+      <field type="String" name="amount" dartType="Float" label="Amount" inputType="text" textInputType="name" maxCharLimit="3" />
+      <field type="String" name="tax" dartType="Float" label="Amount" inputType="text" textInputType="name" maxCharLimit="3" />
+      <field type="String" name="membershipFee" dartType="Float" label="" inputType="text" textInputType="name" maxCharLimit="3" />
+      <field type="String" name="customData" dartType="String" label="Amount" inputType="text" textInputType="name" maxCharLimit="3" />
+    </model> -->
+
+    <!-- <model type="list" name="PlayerMembership" modelName="PlayerMembershipModel" template="model" fileNameExt="dart" shortName="pm" restApiPath="/api/playerMemberships">
+      <field type="String" name="id" dartType="String" label="" inputType="text" textInputType="number" maxCharLimit="50" />
+      <field type="String" name="namespaceId" dartType="String" label="" inputType="" textInputType="" maxCharLimit="" />
+      <field type="String" name="playerId" dartType="String" label="" inputType="" textInputType="" maxCharLimit="" />
+      <field type="String" name="membershipSportId" dartType="String" label="" inputType="" textInputType="" maxCharLimit="" />
+      <field type="String" name="startDate" dartType="String" label="startDate" inputType="text" textInputType="emailAddress" maxCharLimit="45" />
+      <field type="String" name="endDate" dartType="int" label="" inputType="text" textInputType="name" maxCharLimit="3" />
+      <field type="String" name="sportId" dartType="String" label="" inputType="" textInputType="" maxCharLimit="" />
+      
+    </model> -->
+    <!-- base_edit|ds|base_list| -->
+
+    <!-- <model type="list" name="Booking" modelName="BookingModel" template="ds|base_list|base_edit|model" fileNameExt="dart" shortName="bm" restApiPath="/api/bookings/search">
+      <field type="String" name="id" dartType="String" label="" inputType="text" textInputType="" maxCharLimit="50" />
+      <field type="String" name="playerId" dartType="String" label="" inputType="" textInputType="" maxCharLimit="" />
+      <field type="String" name="bookingDate" dartType="Datetime" label="" inputType="" textInputType="" maxCharLimit="" />
+      <field type="String" name="price" dartType="double" label="Price" inputType="text" textInputType="" maxCharLimit="45" />
+      <field type="String" name="tax" dartType="double" label="Tax" inputType="text" textInputType="" maxCharLimit="15" />
+      <field type="String" name="namespaceId" dartType="String" label="" inputType="text" textInputType="" maxCharLimit="45" />
+      <field type="String" name="activeFlag" dartType="int" label="" inputType="text" textInputType="" maxCharLimit="45" />
+    </model> -->
+
+    <model type="list" name="Booking" modelName="BookingModel" template="ds|base_list|base_edit|model" fileNameExt="dart" shortName="bm" restApiPath="">
+      <field type="String" name="id" dartType="String" label="ID" inputType="text" textInputType="name" maxCharLimit="" />
+      <field type="String" name="status" dartType="int" label="Status" inputType="" textInputType="number" maxCharLimit="" />
+      <field type="String" name="age" dartType="int" label="" inputType="" textInputType="number" maxCharLimit="" />
+      <field type="String" name="name" dartType="String" label="Name" inputType="text" textInputType="name" maxCharLimit="" />
+      <field type="String" name="gender" dartType="int" label="Gender" inputType="" textInputType="number" maxCharLimit="" />
+      <field type="String" name="contact" dartType="String" label="Contact" inputType="text" textInputType="name" maxCharLimit="" />
+      <field type="String" name="address" dartType="String" label="Address" inputType="text" textInputType="name" maxCharLimit="" />
+      <field type="String" name="price" dartType="int" label="Price" inputType="" textInputType="number" maxCharLimit="" />
+      <field type="String" name="tax" dartType="int" label="Tax" inputType="" textInputType="number" maxCharLimit="" />
+      <field type="String" name="membershipSportId" dartType="String" label="Membership Sport" inputType="text" textInputType="name" maxCharLimit="" />
+      <field type="String" name="bookingId" dartType="String" label="Booking ID" inputType="text" textInputType="name" maxCharLimit="" />
+      <field type="String" name="bookingTypeId" dartType="String" label="Booking Type ID" inputType="text" textInputType="" maxCharLimit="" />
+      <field type="String" name="dateOfPlay" dartType="Datetime" label="Date of Play" inputType="" textInputType="" maxCharLimit="" />
+      <field type="String" name="slotId" dartType="String" label="Slot ID" inputType="text" textInputType="" maxCharLimit="" />
+      <field type="String" name="courtId" dartType="String" label="Court ID" inputType="text" textInputType="" maxCharLimit="" />
+      <field type="String" name="scheduleId" dartType="String" label="Schedule ID" inputType="text" textInputType="" maxCharLimit="" />
+      <field type="String" name="activeFlag" dartType="int" label="" inputType="text" textInputType="" maxCharLimit="" />
+      <field type="String" name="namespaceId" dartType="String" label="" inputType="text" textInputType="" maxCharLimit="" />
+    </model>
+  </models>
+
+      

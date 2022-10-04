@@ -1,0 +1,85 @@
+{{ define "cubit" }}
+{{- $entityName := (.Name) -}}
+//Auto code generated from xml definition {{timenow}}
+//{{.Name}}
+
+
+import 'dart:io'; 
+
+import '../../constants/app_messages.dart';
+import '../../constants/app_values.dart';
+
+import 'package:bloc/bloc.dart';
+import '../../modules/exceptions/CustomException.model.dart';
+import '../../modules/{{.Name}}/{{.Name}}.repo.dart';
+import '../../modules/{{.Name}}/{{.Name}}.model.dart';
+import 'package:equatable/equatable.dart';
+
+
+part '{{$entityName}}.state.dart';
+
+class {{.Name}}EditCubit extends {{.Name}}Cubit {}
+
+class {{.Name}}ListCubit extends {{.Name}}Cubit {}
+
+class {{.Name}}Cubit extends Cubit<{{.Name}}State> {
+  {{.Name}}Cubit() : super({{.Name}}Initial());
+  {{.Name}}Repo repo = {{.Name}}Repo();
+
+  Future<void> getAll{{pluralize .Name}}() async {
+    emit({{.Name}}Loading());
+    try {
+      // var token = await RepoHelper.getValue(ApiValues.authTokenHeader);
+      List<{{.ModelName}}> items = await repo.getAll{{pluralize .Name}}();
+      emit({{.Name}}ListSuccess(list: items));
+    } on CustomException catch (e, s) {
+      print("STACK TRACE: $s");
+      emit({{.Name}}Failure(errorMsg: e.toString(), errorCode: e.errorCode));
+    } on SocketException catch (e, s) {
+      //TODO: Handling socket exception
+      print("STACK TRACE: $s");
+      emit({{.Name}}Failure(errorMsg: AppMessages.noInternetMsg, errorCode: 4));
+    } catch (e, s) {
+      print("STACK TRACE: $s");
+      emit({{.Name}}Failure(
+          errorCode: AppValues.unknowErrorCode,
+          errorMsg: AppMessages.unknownErrMsg));
+    }
+  }
+
+  //create or update {{.Name}}
+  Future<void> createOrUpdate{{.Name}}({{.ModelName}} {{tolowercamel .ModelName}}) async {
+    emit({{.Name}}Loading());
+    try {
+      String? id = await repo.createOrUpdate({{tolowercamel .ModelName}});
+      emit({{.Name}}EditSuccess(res: id!));
+    } on CustomException catch (e, s) {
+      print("STACK TRACE: $s");
+      emit({{.Name}}Failure(errorMsg: e.toString(), errorCode: e.errorCode));
+    } on SocketException catch (e, s) {
+      //TODO: Handling socket exception
+      print("STACK TRACE: $s");
+      emit({{.Name}}Failure(errorMsg: AppMessages.noInternetMsg, errorCode: 4));
+    } catch (e, s) {
+      print("STACK TRACE: $s");
+      emit({{.Name}}Failure(
+          errorCode: AppValues.unknowErrorCode,
+          errorMsg: AppMessages.unknownErrMsg));
+    }
+  }
+}
+
+//Based on base cubit for common use cases 
+class {{.Name}}Cubit extends BaseCubit<{{.Name}}Model> {
+  {{.Name}}Cubit() : super({{.Name}}Model.fromMap, {{.Name}}Model.toMapStatic);
+
+  void getAll() {
+    super.getAllListData(ApiPaths.{{tolowercamel .Name}}Search);
+  }
+
+  void createOrUpdate({{.Name}}Model {{shortname .Name}}) {
+    super.createOrUpdate(ApiPaths.{{tolowercamel .Name}}Edit, sc);
+  }
+}
+
+{{end}}

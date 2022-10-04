@@ -1,0 +1,41 @@
+{
+ "prodNum":"ACP10120H",
+ "prodName":"10HP 120GAL HORIZONTAL 2 STAGE",
+ "attrs":[{
+    "k":"size",
+    "v":"5"
+ }],
+ "battrs":[{"k":"isGCont", "v":true},
+ {"k":"iskit", "v":true},
+ {"k":"isNew", "v":true},
+ {"k":"isSet", "v":true},
+ {"k":"isTO", "v":true},
+ {"k":"isTP" , "v":true}
+],
+"status":"A",
+ "categories": [],
+ "catalog":"",
+ "groupId":[],
+ "related":[
+ {"type":"",
+ "relatedNum":""}
+ ],
+ "repairParts":["00667-DP10HP3","00667-DP10HP34"],
+ "set":[],
+ "acceParts":[],
+ "brand":"",
+ "availDt":"",
+ "disconDt":"", 
+ "warranty":"W1",
+ "class":"CLASS-A",
+ "salePrice":39.99,
+ "purcPrice":22.99,
+ "unitPrice":22.99,
+ "inventUSymbol":"EA",
+ "imgUrls":[{"k":"1","v":"/NA/PRODUCT/IMAGES/780x780zoom/HKL/HKL12DB.jpg"},
+ {"k":"1","v":"NA/PRODUCT/IMAGES/780x780zoom/HKS/HKS2MMEA.jpg"}
+
+]
+}
+
+

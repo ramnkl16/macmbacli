@@ -1,0 +1,207 @@
+{{ define "base_list" }}
+{{- $entityName := (.Name) -}}
+{{- $short := (shortname .Name ) -}}
+//Auto code generated from xml definition {{timenow}}
+//{{.Name}}
+import '../../constants/app_constants.dart';
+import '../../modules/{{tolowercase .Name}}/{{tolowercase .Name}}.ds.dart';
+import '../../constants/app_values.dart';
+import '../../modules/{{tolowercase .Name}}/{{tolowercase .Name}}.model.dart';
+import '../../modules/{{tolowercase .Name}}/{{tolowercase .Name}}.cubit.dart';
+import '../../modules/{{tolowercase .Name}}/{{tolowercase .Name}}.base_edit.dart';
+import '../../modules/{{tolowercase .Name}}/{{tolowercase .Name}}.model.dart';
+import '../../modules/common/cubit/base_cubit.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../helpers/global.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+import '../../helpers/ui_helpers/ui_helpers.dart';
+
+
+
+class {{.Name}}Page extends StatefulWidget {
+  const {{.Name}}Page({Key? key}) : super(key: key);
+
+  @override
+  _{{.Name}}PageState createState() => _{{.Name}}PageState();
+}
+
+class _{{.Name}}PageState extends State<{{.Name}}Page> {
+  late bool isWebOrDesktop;
+  final DataGridController _dgController = DataGridController();
+  List<{{.ModelName}}> list = <{{.ModelName}}>[];
+
+
+  /// Determine to decide whether the device in landscape or in portrait.
+  late bool isLandscapeInMobileView;
+
+  @override
+  void initState() {
+    BlocProvider.of<{{.Name}}ListCubit>(context).getAll();
+     
+    isWebOrDesktop = Global.isWeb || Global.isDesktop;
+    _dgController.selectedIndex = 0;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: [
+          _buildMenu(),
+          BlocBuilder<{{.Name}}ListCubit, BaseState>(
+            builder: (context, state) {
+              print(state.runtimeType);
+              if (state is BaseLoading) {
+                return const CircularProgressIndicator();
+              } else if (state is BaseFailure) {
+                return Center(
+                  child: Text(state.errorMsg),
+                );
+              } else if (state is BaseListSuccess<{{.Name}}Model>) {
+                list = state.list;
+                return _build{{.Name}}Grid();
+              }else if (state is BaseEmpty) {
+                return Text("No record found, Please create a {{.Name}}");
+              }
+              return const Text("{{.Name}} has unknown state");
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMenu() {
+    return Row(
+      children: [
+        TextButton.icon(
+            onPressed: () async {
+              if (_dgController.selectedIndex == -1)
+                _dgController.selectedIndex = 0;
+              var r =
+                  await showEditPageDialog(list[_dgController.selectedIndex]);
+              setState(() {});
+            },
+            icon: const Icon(Icons.edit),
+            label: const Text(MenuConstants.edit)),
+        TextButton.icon(
+            onPressed: () async {
+              var m = createNewModel();
+              
+              var r = await showEditPageDialog(m);
+              print(m);
+              if (r != null) {
+                list.add(m);
+                if (BlocProvider.of<{{$entityName}}ListCubit>(context).state
+                    is BaseEmpty) {
+                  BlocProvider.of<{{$entityName}}ListCubit>(context)
+                      .emitInitialSuccess(list);
+                } else {
+                  setState(() {});
+                }
+              }
+            },
+            icon: const Icon(Icons.add),
+            label: const Text(MenuConstants.newVal)),
+        TextButton.icon(
+            onPressed: () {
+              var sn = list[_dgController.selectedIndex].name;
+              var rest = showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: Text("Delete {{.Name}} $sn"),
+                  content:
+                      const Text('After deletion you can not retrive it back!'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'Cancel'),
+                      child: const Text('Cancel'),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'OK'),
+                      child: const Text('OK'),
+                    ),
+                  ],
+                ),
+              );
+              //perform delete api and remove item from the list
+            },
+            icon: const Icon(Icons.delete),
+            label: const Text(MenuConstants.deleteVal))
+      ],
+    );
+  }
+
+  Future<dynamic> showEditPageDialog({{.ModelName}} model) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            alignment: Alignment.center,
+            // children: [{{.Name}}EditPage()],
+            content: SizedBox(
+                width: MediaQuery.of(context).size.width - 100,
+                height: MediaQuery.of(context).size.height - 100,
+                child: BlocProvider(
+                  create: (context) => {{.Name}}EditCubit(),
+                  child: {{.Name}}EditPage(
+                    {{$short}}: model,
+                  ),
+                )),
+            // title: Text('data'),
+          );
+        });
+  }
+
+  Widget _build{{.Name}}Grid() {
+    return Padding(
+      padding:  EdgeInsets.all(AppValues.sfGridPadding),
+      child: SfDataGrid(
+      allowSorting: true,
+        source: {{.Name}}DataGridSource(list),
+        selectionMode: SelectionMode.single,
+        allowPullToRefresh: true,
+        navigationMode: GridNavigationMode.cell,
+        controller: _dgController,
+
+        // onSelectionChanging: (addedRows, removedRows) {
+
+        // },
+        onCellTap: (DataGridCellDetails details) async {
+          _dgController.selectedIndex = details.rowColumnIndex.rowIndex - 1;
+          if (details.rowColumnIndex.columnIndex == 0) {
+            await showEditPageDialog(list[_dgController.selectedIndex]);
+            setState(() {});
+            _dgController.selectedIndex = details.rowColumnIndex.rowIndex;
+          }
+        },
+        columnWidthMode: isWebOrDesktop
+            ? (isWebOrDesktop && Global.isMobileResolution)
+                ? ColumnWidthMode.none
+                : ColumnWidthMode.fill
+            : isLandscapeInMobileView
+                ? ColumnWidthMode.fill
+                : ColumnWidthMode.none,
+        columns: <GridColumn>[
+         {{- range .Fields }} {{if .Label}}
+          UIHelper.buildGridColumn(label: '{{.Label}}', columnName: '{{.Name}}'),
+          {{end}}{{end}}
+        ]),);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    isLandscapeInMobileView = !isWebOrDesktop &&
+        MediaQuery.of(context).orientation == Orientation.landscape;
+  }
+
+  {{.ModelName}} createNewModel() {
+    return {{.ModelName}}(
+     {{- range .Fields }} 
+        {{.Name }}: {{if eq .DartType "String"}} '', {{else}} {{if or (eq .DartType "int") (eq .DartType "double")}} 0, {{else}}'' ,{{end}} {{end}}
+       {{end}}); 
+  }
+}{{end}}

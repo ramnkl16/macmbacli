@@ -1,0 +1,51 @@
+{{ define "ds" }}
+{{- $entityName := (.Name) -}}
+//Auto code generated from xml definition {{timenow}}
+//{{.Name}}
+
+import '../../modules/{{tolowercase .Name}}/{{tolowercase .Name}}.model.dart';
+import '../../helpers/ui_helpers/ui_helpers.dart';
+
+
+/// Packages import
+import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+
+class {{.Name}}DataGridSource extends DataGridSource {
+  late final List<{{.ModelName}}> ds;
+
+  /// Creates the {{.Name}} data source class with required details.
+  {{.Name}}DataGridSource(List<{{.ModelName}}> list) {
+    ds = list;
+    buildDataGridRows(list);
+  }
+  List<DataGridRow> _dataGridRows = <DataGridRow>[];
+  static DateTime minDateTime = DateTime.utc(-271821, 04, 20);
+  static DateTime maxDateTime = DateTime.utc(275760, 09, 13);
+
+  /// Building DataGridRows
+  void buildDataGridRows(List<{{.ModelName}}> list) {
+    //print("side build data grid rows ${list.length}");
+    _dataGridRows = list.map<DataGridRow>(({{.ModelName}} s) {
+      return DataGridRow(cells: <DataGridCell>[
+       {{- range .Fields }} 
+       {{if .Label}}DataGridCell<{{.Type}}>(columnName: '{{.Name}}', value: s.{{.Name}}),{{end}}{{end}}
+      ]);
+    }).toList();
+  }
+
+  // Overrides
+  @override
+  List<DataGridRow> get rows => _dataGridRows;
+
+  @override
+  DataGridRowAdapter buildRow(DataGridRow row) {
+    return DataGridRowAdapter(cells: <Widget>[
+    {{ $idx:=0}}
+    {{- range .Fields }}
+    {{if eq .Name "id"}}UIHelper.buildGridIdElemt(row.getCells()[0].value.toString()),{{else}}
+     UIHelper.buildRegGridElemt(row.getCells()[1].value.toString()),{{end}}{{end}}
+    ]);
+  }
+}
+{{end}}

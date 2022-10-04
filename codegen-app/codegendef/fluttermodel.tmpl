@@ -1,0 +1,51 @@
+{{ define "model" }}
+{{- $entityName := (.ModelName) -}}
+{{- $short := (shortname .ModelName ) -}}
+
+//Auto code generated from xml definition {{timenow}}
+//{{.ModelName}}
+
+import 'dart:convert';
+
+
+class {{$entityName}}{
+  {{- range .Fields }} 
+	{{ .Type }} {{ .Name }};{{end}}	
+
+
+  {{$entityName}}({
+  {{- range .Fields }} 
+	required this.{{ .Name }},{{end}}
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      {{- range .Fields }} 
+	    '{{ .Name }}':{{ .Name }},{{end}}
+      };
+  }
+
+  static Map<String, dynamic> toMapStatic({{$entityName}} {{$short}}) {
+    return {
+      {{- range .Fields }} 
+	    '{{ .Name }}':{{$short}}.{{ .Name }},{{end}}
+      };
+  }
+
+  factory {{$entityName}}.fromMap(Map<String, dynamic> map) {
+    return {{$entityName}}(
+      {{- range .Fields }} 
+       {{ .Name }}: map['{{ .Name }}']{{if ne .Type "String"}}?.toInt() ?? 0 {{else}} ?? ''{{end}},{{end}});
+      }
+    
+
+  String toJson() => json.encode(toMap());
+
+  factory {{$entityName}}.fromJson(String source) =>
+      {{$entityName}}.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return '{{$entityName}}({{- range .Fields }} {{ .Name }}: ${{ .Name }}, {{end}})';
+  }}
+{{end}}

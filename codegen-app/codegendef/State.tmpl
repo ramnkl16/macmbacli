@@ -1,0 +1,51 @@
+{{ define "state" }}
+{{- $entityName := (.Name) -}}
+
+//Auto code generated from xml definition {{timenow}}
+//{{.Name}}
+
+part of '{{tolowercase $entityName}}.cubit.dart';
+
+abstract class {{.Name}}State extends Equatable {
+  const {{.Name}}State();
+
+  @override
+  List<Object> get props => [];
+}
+
+class {{.Name}}Initial extends {{.Name}}State {}
+
+class {{.Name}}Loading extends {{.Name}}State {}
+
+class {{.Name}}ListSuccess extends {{.Name}}State {
+  final List<{{.ModelName}}> list;
+  const {{.Name}}ListSuccess({
+    required this.list,
+  });
+
+  @override
+  List<Object> get props => [list];
+}
+
+class {{.Name}}EditSuccess extends {{.Name}}State {
+  final String res;
+  const {{.Name}}EditSuccess({
+    required this.res,
+  });
+
+  @override
+  List<Object> get props => [res];
+}
+
+class {{.Name}}Failure extends {{.Name}}State {
+  final String errorMsg;
+  final int errorCode;
+  const {{.Name}}Failure({
+    required this.errorMsg,
+    required this.errorCode,
+  });
+
+  @override
+  List<Object> get props => [errorCode, errorMsg];
+}
+{{end}}

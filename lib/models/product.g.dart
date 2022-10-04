@@ -83,39 +83,3 @@ class Product extends _Product with RealmEntity, RealmObject {
     ]);
   }
 }
-
-class KV extends _KV with RealmEntity, RealmObject {
-  KV(
-    String k,
-    String v,
-  ) {
-    RealmObject.set(this, 'k', k);
-    RealmObject.set(this, 'v', v);
-  }
-
-  KV._();
-
-  @override
-  String get k => RealmObject.get<String>(this, 'k') as String;
-  @override
-  set k(String value) => RealmObject.set(this, 'k', value);
-
-  @override
-  String get v => RealmObject.get<String>(this, 'v') as String;
-  @override
-  set v(String value) => RealmObject.set(this, 'v', value);
-
-  @override
-  Stream<RealmObjectChanges<KV>> get changes =>
-      RealmObject.getChanges<KV>(this);
-
-  static SchemaObject get schema => _schema ??= _initSchema();
-  static SchemaObject? _schema;
-  static SchemaObject _initSchema() {
-    RealmObject.registerFactory(KV._);
-    return const SchemaObject(KV, 'KV', [
-      SchemaProperty('k', RealmPropertyType.string),
-      SchemaProperty('v', RealmPropertyType.string),
-    ]);
-  }
-}

@@ -1,0 +1,55 @@
+{{ define "repo" }}
+{{- $entityName := (.Name) -}}
+
+//Auto code generated from xml definition {{timenow}}
+//{{.Name}}
+
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:http/http.dart' as http;
+import '../../constants/API/api_values.dart';
+import '../../helpers/repo_helper.dart';
+
+import '../../modules/{{tolowercase $entityName}}/{{tolowercase $entityName}}.model.dart';
+
+import '../../constants/API/api_paths.dart';
+import '../../modules/common/restapiclient.dart';
+
+
+class  {{$entityName}}Repo {
+  final RepoHelper repositoryHelper = RepoHelper();
+
+  Future<List<{{.ModelName}}>> getAll{{pluralize $entityName}}() async {
+    http.Response response =
+        await RestClient.exeReq(RequestType.GET,  ApiPaths.{{tolowercase $entityName}}Search, null);
+
+    if (response.statusCode == HttpStatus.ok) {
+      var jsonResp = jsonDecode(response.body);
+      List<dynamic> list = jsonResp[ApiValues.dataVal];
+      List<{{.ModelName}}> result = [];
+      for (var item in list) {
+        result.add({{$entityName}}Model.fromMap(item));
+      }
+      return result;
+    }
+
+    repositoryHelper.handleAPIErrors(response);
+
+    throw Exception("Unknown Error");
+  }
+
+  Future<String?> createOrUpdate({{.ModelName}} body) async {
+    
+    http.Response response = await RestClient.exeReq(
+        RequestType.POST,  ApiPaths.{{tolowercase $entityName}}Edit , body.toJson());
+    if (response.statusCode == HttpStatus.ok) {
+      var jsonResp = jsonDecode(response.body);
+      String? res = jsonResp[ApiValues.dataVal][ApiValues.idVal];
+      return res;
+    }
+    repositoryHelper.handleAPIErrors(response);
+    throw Exception("Unknown Error");
+  }
+}
+{{end}}
