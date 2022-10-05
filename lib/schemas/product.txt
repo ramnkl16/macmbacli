@@ -1,9 +1,11 @@
+Frently used fields, prodNum, Name, warranty, salePrice, discondinue and available
 assumption product will be master 
 regionProuduct is per country or region, also support languages
 default master copy will be loaded and overwite when needed,
 Tim:
     how to acheive fall back
     is there any benefit is the keep json attribute Name shorter
+    how to show or extract attributes at category level, do we need to create category attribute relationship
 Jim:
     is Accessories part vary per region
     Is category changes per region
@@ -13,8 +15,7 @@ Jim:
     What is the use D.C. Inventory (1-510000, N/A, Check COMP)
     Whas is the status meaning of  (A/D) active or disabled ?
     How Replacement works, a  product has multiple replacement items or cascading
-    is IsprocurementsItemMandatory, IsprocurementsWarehouseMandatory, ProcurementQuantityMultiple,
-    
+    is IsprocurementsItemMandatory, IsprocurementsWarehouseMandatory, ProcurementQuantityMultiple,  
 Producttype
     p-->Product
     Pm-->Product Master

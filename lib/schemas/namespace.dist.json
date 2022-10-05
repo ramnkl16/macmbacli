@@ -1,0 +1,41 @@
+{
+   "nsId": "platform", 
+   "name": "Platform",
+   "recNo": 1,
+   "isActive": true,
+   "createDt":"2018-01-01",
+   "lastModDt":"2018-01-01",
+   "lastModBy":"ADMIN",
+   "createBy":"ADMIN",
+   "settings":{
+     "isNotificationEmail": true,
+     "timeZone": "America/Los_Angeles",
+     "senderEmailName": "Platform",
+     "domain": "platform.com",
+     "state": "CA",
+     "country": "US",
+     "taxpercent": 5,
+    "phone": "123-456-7890",
+    "email": "",
+    "taxGroupCode": "TAX"
+   },
+   "address":{ 
+        "street": "123 Main St",
+        "city": "San Francisco",
+        "state": "CA",
+        "country": "US",
+        "zip": "94105",
+        "loc": {
+            "type": "Point",
+            "coordinates": [-122.4194, 37.7749],
+            "isLocExact": true
+            } 
+       },
+ "org":{
+       "num": "159757",
+        "div":"USM",
+        "district":12,
+        "name": "John",
+        "email": ""
+   }
+}

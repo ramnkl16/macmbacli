@@ -1,0 +1,59 @@
+{
+    "id": "1",
+    "lastName": "Smith",
+    "firstName": "John",
+    "isActive": true,
+    "status": "active",
+    "custNum": "123456",
+    "isWeekly": true,
+    "shopId": "1",
+    "accountType": ["TP", "MP", "MC","TI", "TO"],
+    "receiptMode":["email","mail", "printed"],
+    "pi": {
+        "ssn": "123-45-6789",
+        "dob": "01/01/1970",
+        "driversLicense": "123456789",
+        "driversLicenseState": "CA",
+        "taxId": "123456789"
+    },
+    "pay":{
+        "curBal": 0,
+        "curDue": 0,
+        "curDueDt": "01/01/1970",
+        "pastDue": 0,
+        "pastDueDt": "01/01/1970",
+        "pastDueAmt": 0,
+        "interestAmt": 0,
+        "lateFeeAmt": 0
+    },
+    "paySchedule":[{
+        "dueNum": 1,
+        "dueAmt": 0,
+        "dueDt": "01/01/1970",
+        "dueStatus": "paid",
+        "duePaidDt": "01/01/1970"
+
+    }],
+    "ext":{
+        "statusDt":"2018-01-01",
+        "spouseName":"",
+        "email": "",
+        "mobile": "",
+        "phone": "",
+        "fax": "",
+        "needFlag": true,
+        "deliveryFlag": true,
+        "RepairFlag": true,
+
+        "homePhone": "",
+        "workPhone": "",
+        "address": {
+            "street": "",
+            "postalCode": "",
+            "city": "",
+            "state": "",
+            "country": ""
+        }
+    
+    }
+}

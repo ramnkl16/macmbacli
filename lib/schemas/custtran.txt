@@ -1,0 +1,4 @@
+Every sales or payment ajustment to have respective journal, interest posting and more
+Any update on this collection should keep curBalance on customer collection
+If a scheduled payment is in the middle, customer plan to adjust the payment scheudle due to new purchase an entry should posted as journal in customer for pending due amount which helps to close current due 
+and sum up pending due amount with new purchase schedule, this should clear the customer collection payscheuld array 

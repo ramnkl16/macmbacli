@@ -1,0 +1,27 @@
+{
+   "id": "1",
+   "firstName": "John", 
+    "lastName": "Smith",
+    "age": 25,
+    "createDt": "2017-01-01 00:00:00",
+    "lastModDt": "2017-01-01 00:00:00",
+    "createBy": "admin",
+    "lastModBy": "admin",
+    "nsId":"platform",
+    "loginId": "johnsmith",
+    "password": "password",
+    "email": "",
+    "phone": "",
+    "mobile": "",
+    "role":["admin","user"],
+    "address":{  
+      "streetAddress": "21 2nd Street",
+      "city": "New York",
+      "state": "NY",
+      "postalCode": "10021",
+      "loc": {
+        "type": "Point",
+        "coordinates": [100.0, 0.0]
+      }
+    }
+}

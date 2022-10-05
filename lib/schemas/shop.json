@@ -1,0 +1,41 @@
+{
+    "id": "1",
+    "name": "John Doe",
+    "shopNum": "123456789",
+    "dayNum": "1",
+    "status": "1",
+    "TaxGroup": "1",
+    "Extended": {
+        "email": "",
+        "phone": "",
+        "mobil": "",
+        "fax": "",
+        "contactName":" ",
+        "ownerName":"",
+        "YearEstablished":"",
+        "ShippingType":"",
+        "numMembers":"",
+        "notes":"",
+        "homePhone":"",
+        "workPhone":"",
+        "mailAddress": {
+            "street": "",
+            "postalCode": "",
+            "city": "",
+            "state": "",
+            "country": ""
+        }, 
+        "address": {
+            "street": "",
+            "postalCode": "",
+            "city": "",
+            "state": "",
+            "country": "",
+            "loc": {
+                "type": "Point",
+                "coordinates": [-122.4194, 37.7749],
+                "isLocExact": true
+                } 
+        }
+    }
+}

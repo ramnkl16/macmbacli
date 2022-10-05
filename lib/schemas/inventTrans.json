@@ -1,0 +1,18 @@
+{
+    "id": "1",
+    "qty": 1,
+    "costAmtAdj": 0,
+    "costAmtOperation": 0,
+    "custAmtPhysical": 0,
+    "custAmtPosted": 0,
+    "ReveneAmt": 0,
+    "taxAmt": 0,
+    "issueStatus": "None",
+    "receiptStatus": "None",
+    "inventLocId": "1",
+    "inventSiteId": "1",
+    "distId": "1",
+    "employeeId": "1"
+
+
+}
